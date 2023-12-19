@@ -1,0 +1,83 @@
+# Программа для ветеринарной клиники
+
+# Запрос на вид питомца, возраст, кличку. Вывод в одно приложение.
+def question_1():
+
+    type_of_pet = input('Введите вид вашего питомца: ') # Вид питомца
+    name_animal = input('Введите кличку питомца: ') # Кличка
+    age_animal = input('Введите возраст питомца: ') # Возраст
+
+    separator = '-' * 20 + '\n'
+
+    print(separator)
+    print(f'Информация о питомце:\n'
+          f'Вид: {type_of_pet}\n'
+          f'Кличка: {name_animal}\n'
+          f'Возраст: {age_animal}')
+
+
+    print('\nВсе верно? (Выберите номер варианта)\n'
+    '1. Да\n'
+    '2. Нет\n')
+
+    answer = input('>>> ')
+    print(separator)
+
+    # Да
+    if answer == '1':
+        print('Спасибо за предоставленную информацию!')
+
+    # Нет
+    elif answer == '2':
+        print('Повторите ввод данных...')
+        question_1()
+
+    # Ответ не распознан!
+    else:
+        print('Ответ не распознан')
+        question_1()
+
+# Тест по биологии для студентов
+def question_2():
+    gradus_evolutionis = {
+        'Ардипитек' : 'Ardipithecus',
+        'Австралопитеки' : 'Australopithecus',
+        'Парантроп' : 'Paranthropus',
+        'Человек-умелый' : 'Homo habilis',
+        'Человек-прямоходящий' : 'Homo erectus',
+        'Человек Гейдельбергский' : 'Heidelberga Man',
+        'Человек флоресский' : 'Homo Florum',
+        'Неандертальцы' : 'Neanderthals',
+        'Человек-разумный' : 'Homo sapiens'
+    }
+
+    gradus_evolutionis = ['Ardipithecus', 'Australopithecus', 'Paranthropus', 'Homo habilis', 'Homo erectus', 'Heidelberga Man', 'Homo Florum', 'Neanderthals', 'Homo sapiens']
+
+    Points = 0
+    max_points = len(gradus_evolutionis) * 10
+
+    x = 1
+    for i in gradus_evolutionis:
+        print(f'Введите ступень развития №{x}')
+        x += 1
+
+        print(f'Правильный ответ: {i}')
+        answer = input('>>> ')
+        # Верно
+        if answer == i:
+            print('Верно!')
+            Points += 10
+
+        # Не верно
+        elif answer != i:
+            print('Не верно!')
+
+    print('\nТест завершен!')
+
+    print(f'Вы набрали баллов: {Points} из {max_points}\n')
+
+    print('Правильный ответ')
+    print(gradus_evolutionis[0], gradus_evolutionis[1], gradus_evolutionis[2], gradus_evolutionis[3], gradus_evolutionis[4], gradus_evolutionis[5], gradus_evolutionis[6], gradus_evolutionis[7], gradus_evolutionis[8], sep = ' ==> ')
+
+# question_1()
+question_2()
