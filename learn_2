@@ -39,17 +39,6 @@ def question_1():
 
 # Тест по биологии для студентов
 def question_2():
-    gradus_evolutionis = {
-        'Ардипитек' : 'Ardipithecus',
-        'Австралопитеки' : 'Australopithecus',
-        'Парантроп' : 'Paranthropus',
-        'Человек-умелый' : 'Homo habilis',
-        'Человек-прямоходящий' : 'Homo erectus',
-        'Человек Гейдельбергский' : 'Heidelberga Man',
-        'Человек флоресский' : 'Homo Florum',
-        'Неандертальцы' : 'Neanderthals',
-        'Человек-разумный' : 'Homo sapiens'
-    }
 
     gradus_evolutionis = ['Ardipithecus', 'Australopithecus', 'Paranthropus', 'Homo habilis', 'Homo erectus', 'Heidelberga Man', 'Homo Florum', 'Neanderthals', 'Homo sapiens']
 
