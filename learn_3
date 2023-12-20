@@ -17,7 +17,7 @@ def question_1():
 
 
     long, width = map(int, answer.split()) # Длинна и ширина
-    square = long + width # Площадь прямоугольника
+    square = long * width # Площадь прямоугольника
     perimeter = (long * 2) + (width * 2) # Периметр прямоугольника
 
 
