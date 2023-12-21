@@ -1,3 +1,4 @@
+from time import sleep
 
 def question_1():
     '''Цель: Узнать площадь
@@ -35,19 +36,41 @@ def question_2():
     4. Разделить на разность десятков тысяч (1 - 0)
     '''''
 
-    # (a) Общее число
-    a = 10213
+def condition():
+    answer = input('Введите 5 значное число:\n'
+                   '>>> ')
 
-    # (b) Возведение в степень (**)
-    b = 2 ** 3
+    digits = list(map(int, str(answer)))
 
-    # (c) Разделение на количество сотен (/)
-    c = b / 1
+    if len(digits) == 5:
+        units = digits[4]
+        tens = digits[3]
+        hundreds = digits[2]
+        thousands = digits[1]
+        tens_of_thousands = digits[0]
 
-    # (d) Разделение на разность (-, /)
-    d = c / (1 - 0)
+        return units, tens, hundreds, thousands, tens_of_thousands
 
-    print(f'Ответ: {d}')
+    else:
+        print('Введенное число не соответствует условиям.')
+        sleep(1)
+        return condition()
 
-# question_1()
-question_2()
+
+units, tens, hundreds, thousands, tens_of_thousands = condition()
+# print(units, tens, hundreds, thousands, tens_of_thousands)
+
+
+# (b) Возведение в степень (**)
+b = units ** tens
+
+# (c) Разделение на количество сотен (/)
+c = b / tens
+
+# (d) Разделение на разность (-, /)
+d = c / (tens_of_thousands - thousands)
+
+print(f'Ответ: {d}')
+
+question_1()
+# question_2()
