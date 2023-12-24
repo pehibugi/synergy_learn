@@ -1,0 +1,142 @@
+# Вывод обратного списка
+def Question_1():
+    minimum_value = 1
+    maximum_value = 10000
+
+    # Условия ввода
+    N = int(input('Введите число:\n>>> '))
+    if minimum_value <= N <= maximum_value:
+        print('Принято!')
+
+
+        # Добавление чисел список
+        rewerse_list = []
+        coin = minimum_value
+        for i in range(minimum_value, N + 1):
+            rewerse_list.append(coin)
+            coin += 1
+
+        # Отобразить содержимое перевернутого списка (for)
+        rewerse_list.reverse() # Перевернуть список
+        for i in rewerse_list:
+            print(i)
+
+    else:
+        print('Некорректное значение!')
+
+    return
+
+# def Question_2():
+    pass
+
+# Список со сдвигом
+def Question_2():
+    min_value = 1
+    max_value = 100000
+
+    # Ввести число (N)
+    N = int(input(f'Введите число(мин.: {min_value}, макс.: {max_value})\n>>> '))
+    if min_value <= N < max_value:
+
+        # С помощью цикла for пробежаться по цифрам и добавить в список
+        the_modified_list = []
+        for i in range(min_value, N + 1):
+            the_modified_list.append(i)
+
+        # с помощью pop() извлечь последнее значение и перенести в начало списка(insert())
+        last_value = the_modified_list.pop()
+        the_modified_list.insert(0, last_value)
+
+        # Вывести список на экран
+        print(*the_modified_list)
+
+    else:
+        print('Некорректное значение!')
+        exit(0)
+
+# Расчет количества лодок
+def Question_3():
+
+    # Максимальная вместимость лодки
+    Maximum_boat_capacity = 2
+
+    # Максимальная грузоподъемность лодки
+    def maximum_boat_load_capacity():
+        min_m = 1
+        max_m = 4326
+
+        print('Грузоподъемность лодки')
+        m = int(input(f'Введите число(мин.: {min_m}, макс.: {max_m}):\n>>> '))
+        if min_m <= m <= max_m:
+            print('Принято!\n')
+
+        else:
+            print('Указано некорректное значение!')
+            exit(0)
+
+        return m
+
+    # Сколько рыбаков хотят перебраться на другой берег
+    def number_of_passengers():
+        min_n = 1
+        max_n = 100
+
+        print('Сколько рыбаков хотят перебраться на другой берег?')
+        n = int(input(f'Введите число(мин.: {min_n}, макс.: {max_n}):\n>>> '))
+
+        if min_n <= n <= max_n:
+            print('Принято\n')
+
+        else:
+            print('Некорректное значение!')
+            exit(0)
+
+        return n
+
+    # Сколько весит каждый рыбак (Примерно)
+    def average_passenger_weight(m):
+        min_Ai = 1
+        max_Ai = m
+
+        print('Введите средний вес одного пассажира')
+        Ai = int(input(f'Введите число(мин.: {min_Ai}, макс.: {max_Ai}):\n>>> '))
+
+        if min_Ai <= Ai <= max_Ai:
+            print('Принято\n')
+
+        else:
+            print('Некорректное значение!')
+            exit(0)
+
+        return Ai
+
+    # Вывод результата
+    def result(m, n, Ai, Maximum_boat_capacity):
+        Number_of_boats = int(n / Maximum_boat_capacity) # Сколько нужно лодок
+        residual_load_capacity = int(m - (Ai * Maximum_boat_capacity)) # Остаточная грузоподъемность лодки с учетом массы пассажиров
+
+        sep = '-' * 25
+        print(sep)
+        print(f'Итог:\n'
+              f'- Количество пассажиров: {n}\n'
+              f'- Средний вес одного пассажира(кг): {Ai}\n'
+              f'- Грузоподъемность лодки(кг): {m}\n'
+              f'- Мест в лодке: {Maximum_boat_capacity}\n'
+              f'- Количество необходимых лодок: {Number_of_boats}\n'
+              f'- Остаточная грузоподъемность лодки(кг): {residual_load_capacity}')
+
+        print(sep)
+
+        if residual_load_capacity < 0:
+            print('Примечание: к сожалению лодка не ушла от пирса далеко.')
+
+        return
+
+    m = maximum_boat_load_capacity()
+    n = number_of_passengers()
+    Ai = average_passenger_weight(m)
+    result(m, n, Ai, Maximum_boat_capacity)
+
+# Question_1()
+# Question_2()
+Question_3()
