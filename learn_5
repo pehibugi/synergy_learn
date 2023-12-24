@@ -26,9 +26,6 @@ def Question_1():
 
     return
 
-# def Question_2():
-    pass
-
 # Список со сдвигом
 def Question_2():
     min_value = 1
