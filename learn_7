@@ -1,0 +1,178 @@
+# Уникальные числа
+class question_1_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+    def enter(self):
+        '''Описание:
+        В первую строку вводится число N – количество чисел (1≤N≤100000).
+        Во вторую строку вводится через пробел N чисел, каждое не превышает 2*10e9 по модулю.
+        Требуется выяснить, сколько среди этих чисел различных.
+        Выведите число, равное количеству различных чисел среди данных.'''
+
+        print(self.quest_str.format(self.num_quest, self.name_quest))
+
+        How_many_numbers = self.how_many_numbers_f()
+        list_value = self.entering_numbers_f(How_many_numbers)
+        self.finding_Unique_Numbers_f(list_value)
+
+        return
+
+    # (How_many_numbers) Ввод числа (сколько будет введено чисел)
+    def how_many_numbers_f(self):
+        min_value = 1
+        max_value = 100000
+
+        How_many_numbers = int(input('Сколько раз будет вводится число?\n>>> '))
+
+        # Проверка числа
+        if min_value <= How_many_numbers <= max_value:
+            print('Принято\n')
+
+        else:
+            print('Значение не соответствует условиям')
+            exit(0)
+
+        return How_many_numbers
+
+    # (entering_numbers) Ввод чисел (Ограничения: предыдущий триггер, Каждое число не может быть больше 2*10e9 по модулю)
+    def entering_numbers_f(self, How_many_numbers):
+
+        # Минимальное и максимальное значение для проверки введенных чисел
+        min_value = 1
+        max_value = 2 * 10e9
+
+        # Список для новых чисел
+        list_value = []
+
+        # Счетчик
+        coin = 0
+        max_coin = How_many_numbers
+
+        for i in range(How_many_numbers):
+            print(f'Введено чисел: {coin} из {max_coin}')
+            new_value = int(input('Введите число\n>>> '))
+
+            if min_value <= new_value <= max_value:
+                print('Принято!\n')
+                list_value.append(new_value)
+                coin += 1
+
+            else:
+                print('Введенное число не соответствует требованиям.')
+                exit(0)
+
+
+        return list_value
+
+    # (Finding Unique Numbers) Поиск уникальных чисел
+    def finding_Unique_Numbers_f(self, list_value):
+        coin_value = (len(set(list_value)))
+        print(f'Список: {list_value}')
+        print(f'Уникальных значений в списке: {coin_value}\n')
+
+        return
+
+# Объединение списков
+class question_2_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+    def enter(self):
+        '''Описание:
+        Вводятся два списка чисел, которые могут содержать до 100000 чисел каждый.
+        Все числа каждого списка находятся на отдельной строке.
+        Выведите, сколько чисел содержится одновременно как в первом списке, так и во втором'''
+
+        print(self.quest_str.format(self.num_quest, self.name_quest))
+
+        # Первый список
+        first_list = {1,
+                       2,
+                       3,
+                       4,
+                       5}
+
+        # Второй список
+        second_list = {4,
+                       5,
+                       6,
+                       7,
+                       8}
+
+        self.finding_intersections_f(first_list, second_list)
+
+        return
+
+    # (Finding intersections) Сравнение списков и поиск совпадений
+    def finding_intersections_f(self, first_list, second_list):
+        coin_list = len(first_list.intersection(second_list))
+
+        print(f'Список 1: {first_list}\n'
+              f'Список 2: {second_list}\n'
+              f'Колличество совпадений: {coin_list}\n')
+
+        return
+
+# Yes and No
+class question_3_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+    def enter(self):
+        '''Описание:
+        Во входную строку вводится последовательность чисел через пробел.
+        Для каждого числа выведите слово ”YES” (в отдельной строке), если это число ранее встречалось в последовательности
+        или ”NO”, если не встречалось.'''
+
+        print(self.quest_str.format(self.num_quest, self.name_quest))
+
+        # Ввод в строку несколько чисел через пробел
+        values = input('Введите несколько значений через пробел\n>>> ')
+
+        # Перенос данных в список(list_value_1)
+        list_value_1 = values.split(' ')
+
+        # Создание пустого списка(list_value_2)
+        list_value_2 = []
+
+        # Счетчик 'да' и 'нет'
+        coin_yes = 0
+        coin_no = 0
+
+        # Взять первый элемент из списка(list_value_1)
+        for i in list_value_1:
+            # Если этого элемента нет в списке(list_value_2), то добавить в list_value_2, добавить в счетчик +1 'coin_no' и отправить 'No'
+            if i not in list_value_2:
+                print('No')
+                coin_no += 1
+                list_value_2.append(i)
+
+            # Иначе добавить +1 к счетчику 'coin_yes' и вывести на экран 'Yes'
+            else:
+                coin_yes += 1
+                print('Yes')
+
+        # Вывод f"\nИтог:\n Колличество 'Yes': {coin_yes}\n Колличество 'No': {coin_no}"
+        print(f"\nИтог:"
+              f"\n- Колличество 'Yes': {coin_yes}"
+              f"\n- Колличество 'No': {coin_no}\n")
+
+        return
+
+quest_str, name_quest = ['Задание №{} "{}"', ['Уникальные числа', 'Объединение списков', 'Yes and No']]
+
+data_quest_1 = question_1_class(quest_str, 1, name_quest[0])
+data_quest_1.enter()
+
+data_quest_2 = question_2_class(quest_str, 2, name_quest[1])
+data_quest_2.enter()
+
+data_quest_3 = question_3_class(quest_str, 3, name_quest[2])
+data_quest_3.enter()
