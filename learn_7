@@ -75,7 +75,7 @@ class question_1_class():
 
         return
 
-# Объединение списков
+# Сравнение списков
 class question_2_class():
     def __init__(self, quest_str, num_quest, name_quest):
         self.quest_str = quest_str
@@ -90,6 +90,7 @@ class question_2_class():
 
         print(self.quest_str.format(self.num_quest, self.name_quest))
 
+        # Ввод данных для 
         # Первый список
         first_list = {1,
                        2,
@@ -166,7 +167,7 @@ class question_3_class():
 
         return
 
-quest_str, name_quest = ['Задание №{} "{}"', ['Уникальные числа', 'Объединение списков', 'Yes and No']]
+quest_str, name_quest = ['Задание №{} "{}"', ['Уникальные числа', 'Сравнение списков', 'Yes and No']]
 
 data_quest_1 = question_1_class(quest_str, 1, name_quest[0])
 data_quest_1.enter()
