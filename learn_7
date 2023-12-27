@@ -90,7 +90,7 @@ class question_2_class():
 
         print(self.quest_str.format(self.num_quest, self.name_quest))
 
-        # Ввод данных для 
+        # Ввод данных для
         # Первый список
         first_list = {1,
                        2,
@@ -149,19 +149,25 @@ class question_3_class():
 
         # Взять первый элемент из списка(list_value_1)
         for i in list_value_1:
+            no = 'No'
+            yes = 'Yes'
+
             # Если этого элемента нет в списке(list_value_2), то добавить в list_value_2, добавить в счетчик +1 'coin_no' и отправить 'No'
             if i not in list_value_2:
-                print('No')
+                print(f'Значение: {i}\n'
+                      f'Раньше использовался: {no}\n')
+
                 coin_no += 1
                 list_value_2.append(i)
 
             # Иначе добавить +1 к счетчику 'coin_yes' и вывести на экран 'Yes'
             else:
                 coin_yes += 1
-                print('Yes')
+                print(f'Значение: {i}\n'
+                      f'Раньше использовался: {yes}\n')
 
         # Вывод f"\nИтог:\n Колличество 'Yes': {coin_yes}\n Колличество 'No': {coin_no}"
-        print(f"\nИтог:"
+        print(f"Итог:"
               f"\n- Колличество 'Yes': {coin_yes}"
               f"\n- Колличество 'No': {coin_no}\n")
 
@@ -170,10 +176,10 @@ class question_3_class():
 quest_str, name_quest = ['Задание №{} "{}"', ['Уникальные числа', 'Сравнение списков', 'Yes and No']]
 
 data_quest_1 = question_1_class(quest_str, 1, name_quest[0])
-data_quest_1.enter()
+# data_quest_1.enter()
 
 data_quest_2 = question_2_class(quest_str, 2, name_quest[1])
-data_quest_2.enter()
+# data_quest_2.enter()
 
 data_quest_3 = question_3_class(quest_str, 3, name_quest[2])
 data_quest_3.enter()
