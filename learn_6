@@ -1,0 +1,120 @@
+# Строки - палисандры
+class Question_1():
+    '''Описание:
+    На вход подается 1 строка без пробелов. По данной строке определите, является ли она палиндромом
+    (тоесть, можно ли прочесть ее наоборот, как, например, слово "шалаш").
+    Необходимо вывести ”yes”, если строка является палиндромом, и “no” в противном случае.
+
+    Цель:
+    1. Ввести строку без пробелов
+    2. Скопировать строку и перевернуть.
+    3. Сравнить каждый символ в обоих списках. Если 100% совпадение, то Вывести "yes". Если хотябы 1 символ не совпал, то вывести no'''
+    def __init__(self, str_question, num_question, name_question):
+        self.str_question = str_question
+        self.num_question = num_question
+        self.name_question = name_question
+
+    # Последовательное исполнение
+    def enter(self):
+        self.string_rosewood_f() # Ввод
+
+        return
+
+    # Ввод
+    def string_rosewood_f(self):
+        print(self.str_question.format(self.num_question, self.name_question))
+
+        # Ввод
+        string_rosewood_s = input('Введите строку\n>>> ')
+
+        # Сравнение
+        if str(string_rosewood_s) == str(string_rosewood_s[::-1]):
+            print('yes')
+
+        else:
+            print('no')
+
+        return string_rosewood_s
+
+# Пробелы в строках
+class Question_2():
+    '''Описание:
+    Дана строка, длина которой не превосходит 1000. Вам требуется преобразовать все идущие подряд пробелы в один.
+    Выведите измененную строку
+
+    Цель:
+    1. Ввод строки. Примечание: по заданию в строке должен быть как минимум 1 пробел (x)
+    2. Проверка, что длинна строки не превышает 1000 символов (len)
+    3. Создать 2 строку (new_x), где все пробелы будут спереди, а все остальное после них'''
+
+    def __init__(self, str_question, num_question, name_question):
+        self.str_question = str_question
+        self.num_question = num_question
+        self.name_question = name_question
+
+    # Последовательное исполнение
+    def enter(self):
+        # Задание №n
+        print(self.str_question.format(self.num_question, self.name_question))
+
+        x = self.enter_a_string() # Ввод строки, проверка
+        self.second_line_f(x) # 2 строка
+
+
+        return
+
+    # Ввод строки, проверка
+    def enter_a_string(self):
+        min_value = 0
+        max_value = 1000
+
+        # Ввод
+        x = input('Введите строку\n>>> ')
+
+        # проверки
+        if min_value < len(x) < max_value + 1: # не более 1000 символов
+            print('Принято!')
+
+            self.space_counter = x.count(' ')
+            # print(space_counter)
+            if self.space_counter != 0: # как минимум 1 пробел
+                print('Принято!')
+
+            else:
+                print('У введенной строки нет пробелов!')
+                exit(0)
+
+        else:
+            print('Введенное число не соответствует условиям!')
+            exit(0)
+
+
+        return x
+
+    # 2 строка
+    def second_line_f(self, x):
+        string_with_spaces = x
+
+        # Счетчик пробелов
+        space_count = string_with_spaces.count(' ')
+        space_count_I = ' ' * space_count
+
+        # Удаление пробелов
+        string_without_spaces = string_with_spaces.replace(' ', '')
+
+        # Слияние строк
+        total = "'" + space_count_I + string_without_spaces + "'"
+
+        print(f'Изначальные данные: {string_with_spaces}\n'
+              f'Измененные данные: {total}')
+
+        return
+
+
+data_question, name_question = ['Задание №{} "{}".', ['Строки-палисандры', 'Пробелы в строках', '']]
+
+dat_q_1 = Question_1(data_question, 1, name_question[0])
+dat_q_1.enter()
+
+dat_q_2 = Question_2(data_question, 2, name_question[1])
+# dat_q_2.enter()
