@@ -7,7 +7,7 @@ class question_1_class():
         self.name_quest = name_quest
 
         self.pet_database = dict() # (dict()) создать пустой словарь (pet database)
-        self.sep = '-' * 20
+        self.sep = '-' * 35
 
         '''Описание:
         Ранее вы выполняли задание связанное с ветеринарной клиникой. 
@@ -55,7 +55,7 @@ class question_1_class():
 
         Pet_type, Pet_age, Owner_s_name, ending = self.survey_f()
         self.adding_information_to_the_database_f(Pet_type, Pet_age, Owner_s_name, ending)
-        self.summing_up_option_1(Pet_type, Pet_age, Owner_s_name, ending)
+        self.summing_up_option_1()
         self.summing_up_option_2()
 
 
@@ -95,7 +95,7 @@ class question_1_class():
     def adding_information_to_the_database_f(self, Pet_type, Pet_age, Owner_s_name, ending):
 
         self.pet_database = {"Информация о питомце (Вариант №1)": {"Тип": Pet_type,
-                                                                   "Возраст(года)": Pet_age,
+                                                                   "Возраст": Pet_age,
                                                                     "Владелец": Owner_s_name,
                                                                     'Окончание (возраст)': ending},
 
@@ -109,11 +109,15 @@ class question_1_class():
         return
 
     # Подведение итогов (Вариант 1)
-    def summing_up_option_1(self, Pet_type, Pet_age, Owner_s_name, ending):
+    def summing_up_option_1(self):
+        Pet_type_sl = self.pet_database['Информация о питомце (Вариант №1)']['Тип']
+        Pet_age_sl = self.pet_database['Информация о питомце (Вариант №1)']['Возраст']
+        Owner_s_name = self.pet_database['Информация о питомце (Вариант №1)']['Владелец']
+        ending = self.pet_database['Информация о питомце (Вариант №1)']['Окончание (возраст)']
 
         print(f'Информация о питомце (Вариант №1):\n'
-              f'Тип: {Pet_type}\n'
-              f'Возраст: {Pet_age} {ending}\n'
+              f'Тип: {Pet_type_sl}\n'
+              f'Возраст: {Pet_age_sl} {ending}\n'
               f'Владелец: {Owner_s_name}')
         print(self.sep)
 
