@@ -1,0 +1,190 @@
+# Запись в поликлинику
+class question_1_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        self.pet_database = dict() # (dict()) создать пустой словарь (pet database)
+        self.sep = '-' * 20
+
+        '''Описание:
+        Ранее вы выполняли задание связанное с ветеринарной клиникой. 
+        В той задаче вам предстояло вывести информацию о питомце на экран. 
+        Сейчас вам необходимо создать словарь pets={} 
+        
+        Примерный вид будет следующим: 
+        pets = {"Имя питомца":{'Вид питомца':#придумайте каким образом сюда внести информацию,
+                               'Возраст питомца': #придумайте каким образом сюда внести информацию, 
+                               'Имя владельца': #придумайте каким образом сюда внести информацию}}
+        
+        У вас должен получиться словарь, с ещё одним словарём внутри. 
+        Тоесть, есть словарь pets. Он в себе хранит ещё один словарь, который обозначается именем питомца. 
+        Имя питомца также нужно каким-то образом вносить туда. 
+        Задача не будет считаться выполненной, если вы заходите сразу внести информацию,не прибегая к функции input()
+        
+        Например: 
+        pets = {"Мухтар":{"Вид питомца":"Собака",
+                          "Возраст питомца":9,
+                          "Имя владельца":"Павел"}}
+                          
+        Так должен будет выглядеть результируюший словарь, но первоначальный его вид - пустой.
+        Его необходимо заполнить пользовательским вводом через консоль с помощью функции input(),
+        а не вписать значения уже в самом коде. Возраст питомца должен быть типа int. Всё остальное - строки
+        Так как возраст питомца указывается типом int. Необходимо, в соответствии с указанным возрастом выводит год, года или лет.
+        
+        Например: 
+        Его возраст: 24 года 
+        Его возраст: 21 год
+        Его возраст: 19 лет 
+        
+        И теперь осталось только получить всю информацию о питомце в виде строки, как из задания по УрокNo3. 
+        Ввод - вывод и базовые переменные.
+        Задание No1, но с небольшими изменениями. Для получения информации необходимо воспользоваться методами словаря 
+        
+        keys() и values(): 
+        Это желторотый питон по кличке "Каа". 
+        Возраст питомца: 19 лет. 
+        Имя владельца: Саша
+        '''
+
+    # Последовательное исполнение
+    def enter(self):
+        print(self.quest_str.format(self.num_quest, self.name_quest)) # Номер задания
+
+        Pet_type, Pet_age, Owner_s_name, ending = self.survey_f()
+        self.adding_information_to_the_database_f(Pet_type, Pet_age, Owner_s_name, ending)
+        self.summing_up_option_1(Pet_type, Pet_age, Owner_s_name, ending)
+        self.summing_up_option_2()
+
+
+        return
+
+    # Опрос
+    def survey_f(self):
+            # (input()) получение данных "Вид питомца" (Pet type)
+            Pet_type = input('Введите вид питомца\n>>> ')
+
+            # (input()) Получение данных "Возраст питомца" (Pet age)
+            Pet_age = int(input('Введите возраст питомца\n>>> '))
+
+            # (input()) Получение данных "Имя владельца" (Owner's name)
+            Owner_s_name = input('Введите Имя владельца\n>>> ')
+            print(self.sep)
+
+            # () Создать граматический словарь для указания возраста (grammar dictionary)
+            year = [1, 21, 31, 41, 51, 61, 71, 81, 91, 101]  # год
+            years = [2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92,
+                     93, 94]  # года
+
+            # () Условия для настройки граматики
+            ending = ''
+            if Pet_age in year:
+                ending = 'год'
+
+            elif Pet_age in years:
+                ending = 'года'
+
+            else:
+                ending = 'лет'
+
+            return Pet_type, Pet_age, Owner_s_name, ending
+
+    # Добавление информации в базу данных
+    def adding_information_to_the_database_f(self, Pet_type, Pet_age, Owner_s_name, ending):
+
+        self.pet_database = {"Информация о питомце (Вариант №1)": {"Тип": Pet_type,
+                                                                   "Возраст(года)": Pet_age,
+                                                                    "Владелец": Owner_s_name,
+                                                                    'Окончание (возраст)': ending},
+
+                             'Информация о питомце (Вариант №2)': {"Тип": Pet_type,
+                                                                   "Возраст(года)": Pet_age,
+                                                                   "Владелец": Owner_s_name
+                                                                    }}
+
+        # print(nested_dict)
+
+        return
+
+    # Подведение итогов (Вариант 1)
+    def summing_up_option_1(self, Pet_type, Pet_age, Owner_s_name, ending):
+
+        print(f'Информация о питомце (Вариант №1):\n'
+              f'Тип: {Pet_type}\n'
+              f'Возраст: {Pet_age} {ending}\n'
+              f'Владелец: {Owner_s_name}')
+        print(self.sep)
+
+        return
+
+    # Подведение итогов (Вариант 2)
+    def summing_up_option_2(self):
+
+        print('Информация о питомце (Вариант №2)')
+        for key, value in self.pet_database['Информация о питомце (Вариант №2)'].items():
+                print(f'{key}: {value}')
+        print(self.sep)
+
+        return
+
+# Данные для словаря и возведение в степень
+class question_2_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        '''Описание:
+        С помощью цикла создайте словарь, в котором ключи будут, например от числа 10, до -5(включительно). 
+        А значениями этих ключей будут сами эти числа возведённые в степени равных этим числам.
+        
+        Например: 
+        my_dict={10:10000000000,
+                 9:387420489,#итакдалее...-5:-0.00032}
+        '''
+
+    # Последовательное исполнение
+    def enter(self):
+        print(self.quest_str.format(self.num_quest, self.name_quest))  # Номер задания
+
+        self.meanings_and_exponentiations()
+
+        return
+
+
+    '''1. (keys) Создать цикл с ключами (от 10 до -5)
+       2. (values) Значениями ключей будут числа возведенные в степень равных этим числам (10 = 10 степени)'''
+    def meanings_and_exponentiations(self):
+        # Получить значения для списка
+        min_value = 10
+        max_value = -5
+
+        list_value = [] # словарь для значений
+        while min_value != max_value - 1:
+            list_value.append(min_value)
+            min_value -= 1
+
+        # с помощью цикла for вытащить значение, а также возведенное в степень значение и добавить в словарь
+        first_dict = dict()
+        for i in list_value:
+            key = i
+            value = i ** i
+            first_dict[key] = value
+
+        # Вывод данных
+        print('Завершенный словарь:')
+        for key, value in first_dict.items():
+            print(f'{key}: {value}')
+
+        return
+
+
+quest_str, name_quest = ['Задание №{} "{}"', ['Запись в поликлинику', 'Данные для словаря и возведение в степень']]
+
+data_quest_1 = question_1_class(quest_str, 1, name_quest[0])
+data_quest_1.enter()
+
+data_quest_2 = question_2_class(quest_str, 2, name_quest[1])
+# data_quest_2.enter()
