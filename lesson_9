@@ -1,0 +1,384 @@
+from time import sleep
+
+# Вычисление факториала
+class question_1_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        '''Описание:
+            Создайте функцию, которая принимает в качестве параметра - натуральное целое число. 
+            Данная функция находит факториал полученного числа 
+            Например, факториал числа 3 это число 6.
+            
+            Теперь создайте список факториалов чисел от получившегося ранее факториала 6, до 1. 
+            В итоге, на вход программа получает например число 3, возвращает число 6 (факториал числа 3)
+            и вам нужно сделать список из факториалов числа 6 в убывающем порядке. Находим факториал числа 6 - это 720,
+            затем от числа 5 - это 120 и так далее вплоть до 1 Тоесть, результирующий список будет выглядеть в нашем примере так:
+            [720,120,24,6,2,1]
+            
+        '''
+
+    # Последовательное исполнение
+    def enter(self):
+        print(self.quest_str.format(self.num_quest, self.name_quest)) # Номер задания
+
+        # Ввод (enter_natural_num_f)
+        factorial_dictionary = [] # словарь для факториалов
+        natural_value = self.enter_natural_value_f()
+        while natural_value != 0:
+            factorial = self.factorial_calculation_f(natural_value) # Вычисление факториала (factorial_calculation_f)
+            factorial_dictionary.append(factorial) # Добавление факториала в словарь
+            natural_value -= 1 # Получение нового числа для факториала
+
+        self.sep()
+        print(f'Вывод словаря с факториалами:\n{factorial_dictionary}')  # Вывод на экран словаря
+        self.sep()
+
+    # Ввод и проверка числа(enter_natural_num_f)
+    def enter_natural_value_f(self):
+        # Проверка
+        try:
+            natural_num = int(input('Введите натуральное число\n>>> '))
+
+            if (natural_num % 1 == 0 and natural_num >= 0):
+                print('Принято!\n')
+                return natural_num
+
+            else:
+                self.error()
+                return self.enter_natural_value_f()
+
+        except:
+            self.error()
+            return self.enter_natural_value_f()
+
+    # Вычисление факториала (factorial_calculation_f)
+    def factorial_calculation_f(self, natural_value):
+        # начальное значение факториала
+        factorial = 1
+
+        # Вычисляем факториал числа num
+        for i in range(1, natural_value + 1):
+            factorial = i * factorial
+
+        return factorial
+
+    # Вывод сообщения об ошибке
+    def error(self):
+        print('Введенные данные не соответствуют требованиям.\n'
+              'Попробуйте еще раз!\n')
+
+        return
+
+    # Оформление кода
+    def sep(self):
+        print('-' * 30)
+        return
+
+# Запись в ветклинику Ситивет. Версия 3.0
+class question_2_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        self.new_dict = dict()  # Словарь для питомцев
+
+        '''Описание:
+            В Урок No 10. Задание No 1 вы создавали словарь с информацией о питомце. Теперь нам нужна "настоящая" база 
+            данных для ветеринарной клиники. Подробный требуемый функционал будет ниже. 
+            Пока что справка: 
+            ●Создайте функцию create
+            ●Создайте функцию read
+            ●Создайте функцию update
+            ●Создайте функцию delete
+            ●Используйте словарь pets, который будет предоставлен ниже, либо создайте свой аналогичный 
+
+            Функция create. 
+            Данная функция будет создавать новую запись с информацией о питомце 
+            и добавлять эту информацию в наш словарь pets.
+
+            Функция read. 
+            Данная функция будет отображать информацию о запрашиваемом питомце в виде:
+            - Это желторотый питон по кличке "Каа". 
+            - Возраст питомца: 19лет.
+            - Имя владельца: Саша 
+
+            Функция update.
+            Данная функция будет обновлять информацию об указанном питомце
+
+            Функция delete.
+            Данная функция будет удалять запись осуществующем питомце.
+
+
+            Структура результирующего словаря pets будет как и в Урок No 10. Задание No 1, 
+            но с небольшим видоизменением:
+            - Словарь pets: pets = {1:{"Мухтар":{"Вид питомца":"Собака",
+                                                 "Возраст питомца": 9,
+                                                 "Имя владельца":"Павел"},},
+
+                                    2:{"Каа":{"Вид питомца": "желторотый питон", 
+                                              "Возраст питомца": 19,
+                                              "Имя владельца": "Саша"},},
+
+                                    #итакдалее}
+
+            Здесь, 1 и 2 - это идентификаторы наших питомцев. Это уникальные ключи,
+            по которым мы сможем обращаться к нашим записям в "базе данных".
+
+            -------------------------------------------------------------------
+            Суть будущей программы будет заключаться в следующем:
+            ●Программа будет работать с помощью цикла while с условием command!='stop',
+            тоесть до тех пор, пока на предложение ввести команду, пользователь не введёт слово stop
+
+            ●Перед взаимодействием с "базой данных" запрашивается одна из команд в качестве пользовательского ввода.
+            Пусть это будет переменная command
+
+            ●Функция create должна добавлять новую информацию таким образом, чтобы идентификатор увеличивался на единицу.
+            Чтобы у вас была возможность получать последний ключ в словаре воспользуйтесь импортом модуля collections.
+
+            В начале вашей программы пропишите строчку: 
+            - importcollection, а в функции create в первых строках пропишите следующий код:
+            - defcreate(): last=collections.deque(pets,maxlen=1)[0]last
+            в данном случае и будет число последнего ключа (или в нашей логике - идентификатора записи).
+            Именно его и необходимо будет увеличивать на единицу при добавлении следующей записи. 
+            Как вам уже известно - суть функций заключается в том, чтобы использовать один и тот же код в нескольких местах.
+            В данной задаче вам предстоит получать информацию о питомце несколько раз. Чтобы не повторяться в коде,
+            вам нужно создать такие функции get_pet(ID): defget_pet(ID): 
+            # функция, с помощью которой вы получите информацию о питомце в виде словаря 
+            # сделайте проверку, если питомца с таким ID нету в нашей "базе данных" 
+            # верните в этом случае False
+            # а если питомец всёже есть в "базе данных" - верните информацию о нём
+            # выглядеть это может примерно так: 
+            - return pets[ID]
+            - if ID in pets.keys()
+            - else:
+                False get_suffix(age):
+                defget_suffix(age):# функция, с помощью которой можно получить суффикс
+                #'год','года','лет'# реализацию это йфункции вам предстоит придумать самостоятельно
+                # функция будет возвращать соответствующую строку return
+                pets_list():
+                defpets_list(): #Эта функция будет создана для удобства отображения всего списка питомцев
+                # Информацию по каждому питомцу можно вывести с помощью цикла for 
+                Обратите внимание, если ID не существует в словаре с питомцами - будет возникать ошибка.
+                Вам можно от неё избавиться, если правильно составить проверочное условие.
+                Здесь не потребуется использовать такие конструкции, как try, except, чтобы обработать возникшую ошибку
+        '''
+
+    # Последовательное исполнение
+    def enter(self):
+        print(f'{self.quest_str.format(self.num_quest, self.name_quest)}\n')  # Номер задания
+        self.main_menu()
+
+    # Главное меню
+    def main_menu(self):
+
+        print(f'{self.sep(4)}Главное меню{self.sep(4)}')
+        print('1. Показать список\n'
+              '2. Добавить запись\n'
+              '3. Редактировать запись\n'
+              '4. Удалить запись')
+        print('0. Выход')
+        f'{self.sep(1)}\n'
+
+        try:
+            answer = int(input('Введите номер комманды:\n>>> '))
+        except:
+            answer = None
+
+        # Вывод, если в списке ничего нет
+        if (len(self.new_dict) == 0) and (answer == 1 or answer == 3 or answer == 4):
+            print('Записей не обнаружено!\n')
+            sleep(2)
+            self.main_menu()
+
+        # Показать список
+        elif (len(self.new_dict) > 0) and (answer == 1):
+            self.read()
+
+        # Добавить запись
+        elif answer == 2:
+            self.create()
+
+        # Редактировать запись
+        elif (len(self.new_dict) > 0) and (answer == 3):
+            self.upgrade()
+
+        # Удалить запись
+        elif (len(self.new_dict) > 0) and (answer == 4):
+            self.delete()
+
+        # Завершение работы
+        elif answer == 0:
+            self.exit()
+
+        else:
+            print('Комманда не распознанна!')
+            sleep(2)
+            self.main_menu()
+
+
+    '''Основные функции'''
+    # Вывод списка на экран
+    def read(self):
+        print(f'Загрузка данных...')
+        sleep(3)
+
+        print("\nИнформация о питомцах")
+
+        self.sep(2)
+        for key in self.new_dict.keys():
+            record_number = key  # Номер записи: %n
+            type = self.new_dict[key]['Вид']  # Вид: %n
+            name = self.new_dict[key]['Имя']  # Имя: %n
+            age = self.new_dict[key]['Возраст']  # Возраст: %n (год, года, лет)
+            ending = self.new_dict[key]['Окончание']  # Окончание
+            owner = self.new_dict[key]['Владелец']  # Владелец
+
+            print(f'Номер записи: {record_number}\n'
+                  f'Вид: {type}\n'
+                  f'Имя: {name}\n'
+                  f'Возраст: {age} {ending}\n'
+                  f'Владелец: {owner}')
+            f'{self.sep(2)}\n'
+            sleep(1)
+
+        sleep(3)
+        return self.main_menu()
+
+    # Создание новой записи
+    def create(self):
+        type_pet, name_pet, age_pet, ending, pet_owner = self.opros()  # Опрос
+        num_key = self.search_space_num()  # Поиск свободного места
+        self.new_note(num_key, type_pet, name_pet, age_pet, ending, pet_owner)  # Добавление записи
+
+        sleep(2)
+        return self.main_menu()
+
+    # Редактирование списка
+    def upgrade(self):
+        try:
+            num_upgrade = int(input('Введите "Номер записи" для изменения данных\n>>> '))
+        except:
+            num_upgrade = None
+
+        # в наличии
+        if num_upgrade in self.new_dict:
+            type_pet, name_pet, age_pet, ending, pet_owner = self.opros()  # Опрос
+            self.new_note(num_upgrade, type_pet, name_pet, age_pet, ending, pet_owner)  # Добавление записи
+
+        # данных нет
+        else:
+            print('Данные с указанным номером отсутствуют.')
+
+        return self.main_menu()
+
+    # Удаление записи
+    def delete(self):
+        num_delete = int(input('Введите номер записи для удаления данных\n>>> '))
+
+        del self.new_dict[num_delete]
+        print('Запись удалена!')
+
+        return self.main_menu()
+
+    # Завершение работы
+    def exit(self):
+        print('Завершение работы. Хорошего дня!')
+        exit(0)
+
+
+    '''Дополнительные функции'''
+    # Опрос
+    def opros(self):
+        type_pet = input('Введите вид питомца (Например: кот)\n>>> ')
+        name_pet = input('Введите имя питомца:\n>>> ')
+
+        try:
+            age_pet = int(input('Введите возраст питомца:\n>>> '))
+
+        except:
+            age_pet = 0
+
+        ending = self.ending_age(age_pet)  # Граматическое окончание (год, года, лет)
+        pet_owner = input('Введите имя хозяина питомца\n>>> ')  # Владелец питомца
+
+        return type_pet, name_pet, age_pet, ending, pet_owner
+
+    # Поиск свободного места
+    def search_space_num(self):
+        # Поиск свободного ключа
+        num_key = 0
+        while True:
+            if num_key in self.new_dict:  # Выполнить если ключ занят
+                num_key += 1
+                continue
+
+            else:  # Выполнить, если ключ свободен
+                return num_key
+
+    # Добавление записи
+    def new_note(self, num_key, type_pet, name_pet, age_pet, ending, pet_owner):
+        self.new_dict[num_key] = {'Вид': type_pet,
+                                  'Имя': name_pet,
+                                  'Возраст': age_pet,
+                                  'Окончание': ending,
+                                  'Владелец': pet_owner}
+
+        print('Спасибо за предоставленную информацию!\n')
+        sleep(2)
+        return
+
+    # Окончание (год, года, лет)
+    def ending_age(self, age_pet):
+        # Создать граматический словарь для указания возраста (grammar dictionary)
+        year = [1, 21, 31, 41, 51, 61, 71, 81, 91, 101]  # год
+        years = [2, 3, 4, 22, 23, 24, 32, 33, 34, 42, 43, 44, 52, 53, 54, 62, 63, 64, 72, 73, 74, 82, 83, 84, 92, 93,
+                 94]  # года
+
+        # () Условия для настройки граматики
+        if age_pet in year:
+            ending = 'год'
+
+        elif age_pet in years:
+            ending = 'года'
+
+        else:
+            ending = 'лет'
+
+        return ending
+
+    # Оформление кода
+    def sep(self, type_sep):
+
+        # Меню
+        if type_sep == 1:
+            print("=" * 30)
+
+        # Список\словарь
+        elif type_sep == 2:
+            print("=" * 30)
+
+        # Завершение работы
+        elif type_sep == 3:
+            print(f'%{"-" * 30}%')
+
+        # Заглавие
+        elif type_sep == 4:
+            sep_main = "-" * 10
+
+            return sep_main
+
+        return
+
+
+quest_str, name_quest = ['Задание №{} "{}"', ['Вычисление факториала', 'Запись в ветклинику Ситивет. Версия 3.0']]
+if __name__ == '__main__':
+    data_quest_1 = question_1_class(quest_str, 1, name_quest[0])
+    data_quest_1.enter()
+
+    data_quest_2 = question_2_class(quest_str, 2, name_quest[1])
+    # data_quest_2.enter()
