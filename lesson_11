@@ -1,0 +1,42 @@
+# Вывод значений из списка без использования циклов
+class question_1_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        self.my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+
+        '''Описание:
+        Есть последовательность 
+        my_list = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ,11, 12, 13, 14, 15, 16]
+        
+        Напишите рекурсивную функцию, которая выведет все элементы от первого до последнего и в конце отобразит 
+        сообщение Конец списка, если выводить больше нечего.
+        Циклы использовать запрещено!
+        '''
+
+    # Последовательное исполнение
+    def enter(self):
+        print(self.quest_str.format(self.num_quest, self.name_quest)) # Номер задания
+
+        self.recursia() # Последовательный вывод значений из списка без использования циклов
+
+        return
+
+    def recursia(self, n = 0):
+        print(self.my_list[n])
+
+        if (len(self.my_list) - 1) == (n):
+            print('Программа завершена!')
+            exit(0)
+
+        else:
+            n += 1
+            return self.recursia(n)
+
+quest_str, name_quest = ['Задание №{} "{}"', ['Вывод значений из списка без использования циклов', '', '']]
+
+data_quest_1 = question_1_class(quest_str, 1, name_quest[0])
+data_quest_1.enter()
