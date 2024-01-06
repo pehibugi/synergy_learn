@@ -21,11 +21,13 @@ class Transport_question_1:
                       Создайте объект Autobus,
                       который унаследует все переменные и методы
                       родительского класса Transport и выведете его.
+                      
                       Ожидаемый результат вывода: 
-
+                      -----------------------
                       Название автомобиля: Renault Logan 
                       Скорость: 180
                       Пробег: 12
+                      -----------------------
         '''
 
 class question_1_class(Transport_question_1):
@@ -57,6 +59,10 @@ class Transport_question_2:
         self.quest_str = quest_str
         self.num_quest = num_quest
         self.name_quest = name_quest
+
+    def seating_capacity(self, capacity = 50):
+        return f'Название автобуса: {self.name}\n' \
+               f'Пассажирский мест: {capacity}'
 
         '''Описание:
             Создайте класс Autobus, который наследуется от класса Transport.
