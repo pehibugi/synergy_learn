@@ -1,0 +1,105 @@
+# Пробег автобуса
+class Transport_question_1:
+
+    def __init__(self, quest_str, num_quest, name_quest, name_autobus = None, max_speed = 0, mileage = 0):
+        self.name_autobus = name_autobus
+        self.max_speed = max_speed
+        self.mileage = mileage
+
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        '''Описание:
+            Есть родительский класс: 
+                class Transport:
+                   def __init__ (self, name, max_speed, mileage):
+                      self.name = name 
+                      self.max_speed = max_speed
+                      self.mileage = mileage
+
+                      Создайте объект Autobus,
+                      который унаследует все переменные и методы
+                      родительского класса Transport и выведете его.
+                      Ожидаемый результат вывода: 
+
+                      Название автомобиля: Renault Logan 
+                      Скорость: 180
+                      Пробег: 12
+        '''
+
+class question_1_class(Transport_question_1):
+
+    # Последовательное исполнение
+    def enter(self):
+        print(self.quest_str.format(self.num_quest, self.name_quest)) # Номер задания
+
+        self.autobus_f()
+
+        return
+
+    def autobus_f(self):
+        print(f'Название автобуса: {self.name_autobus}\n'
+              f'Скорость: {self.max_speed}\n'
+              f'Пробег: {self.mileage}')
+
+        return
+
+
+# Вместимость автобуса
+class Transport_question_2:
+
+    def __init__(self, quest_str, num_quest, name_quest, name_autobus, max_speed, mileage):
+        self.name = name_autobus
+        self.max_speed = max_speed
+        self.mileage = mileage
+
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        '''Описание:
+            Создайте класс Autobus, который наследуется от класса Transport.
+            Дайте аргументу Autobus.seating_capacity() значение по умолчанию 50. 
+            Используйте переопределение метода. 
+            Используйте следующий код для родительского класса транспортного средства:
+
+            class Transport:
+               def __init__(self,name,max_speed,mileage):
+                  self.name = name
+                  self.max_speed=max_speed
+                  self.mileage = mileage
+
+                  def seating_capacity(self, capacity):
+                     return f" Вместимость одного автобуса {self.name}{capacity} пассажиров
+
+
+                     "Ожидаемый результат вывода:
+                     Название транспорта: RenaultLogan  
+                     Вместимость одного автобуса: 50 пассажиров
+        '''
+
+class question_2_class(Transport_question_2):
+
+    # Последовательное исполнение
+    def enter(self):
+        print(self.quest_str.format(self.num_quest, self.name_quest))  # Номер задания
+
+        print(self.seating_capacity())
+
+    # Код
+    def seating_capacity(self, capacity = 50):
+        return f'Название автобуса: {self.name}\n'\
+               f'Пассажирский мест: {capacity}'
+
+
+quest_str, name_quest = ['Задание №{} "{}"', ['Пробег автобуса', 'Вместимость автобуса']]
+
+name_autobus = 'Renault Logan'
+max_speed = 60
+mileage = 2000
+data_quest_1 = question_1_class(quest_str, 1, name_quest[0], name_autobus, max_speed, mileage)
+# data_quest_1.enter()
+
+data_quest_2 = question_2_class(quest_str, 2, name_quest[1], name_autobus, max_speed, mileage)
+data_quest_2.enter()
