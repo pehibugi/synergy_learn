@@ -1,0 +1,373 @@
+from time import sleep
+
+# Касса
+class question_1_class():
+    def __init__(self, quest_str, num_quest, name_quest):
+
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        self.balance = 0
+
+        '''Описание:
+            Создайте класс Касса, который хранит текущее количество денег в кассе, у него есть методы:
+            
+            ●top_up(X)-пополнить на X
+            ●count_1000() - выводит сколько целых тысяч осталось в кассе
+            ●take_away(X) - забрать X из кассы, либо выкинуть ошибку, что недостаточно денег
+        '''
+
+    # Последовательное исполнение
+    def enter(self):
+        print(self.quest_str.format(self.num_quest, self.name_quest)) # Номер задания
+
+        self.main_menu()
+
+        return
+
+    def main_menu(self):
+
+        print('Главное меню:\n'
+              '1. Показать баланс\n'
+              '2. Ввод средств\n'
+              '3. Вывод средств')
+        print('0. Завершение работы')
+        print(self.setting(1))
+
+        try:
+            answer = int(input('Введите номер комманды\n>>> '))
+        except:
+            answer = None
+
+        # Показать баланс
+        if answer == 1:
+            self.show_balance_f()
+
+        # Ввод средств
+        elif answer == 2:
+            self.Depositing_funds_f()
+
+        # Вывод средств
+        elif answer == 3:
+            self.Withdrawal_of_funds_f()
+
+        # Завершение работы
+        elif answer == 0:
+            print('Завершение работы')
+            exit(0)
+
+        # Комманда не распознанна!
+        else:
+            print('Комманда не распознанна!')
+            return self.main_menu()
+
+    # (count_1000) Показать баланс (только колличество купюр номиналом в 1000)
+    def show_balance_f(self):
+        count_1000 = self.balance // 1000
+        print(f'Номиналы купюр:\n'
+              f'1000: {count_1000}')
+        print(f'Текущий баланс: {self.balance}')
+
+        return self.return_main_menu()
+
+    # (top_up) Ввод средств
+    def Depositing_funds_f(self):
+        try:
+            top_up = int(input('Введите сумму:\n>>> '))
+
+        except:
+            top_up = 0
+
+        self.balance += top_up
+        print('Операция успешно завершена!')
+
+        return self.return_main_menu()
+
+    # (take_away) Вывод средств
+    def Withdrawal_of_funds_f(self):
+        try:
+            answer = int(input('Введите сумму\n>>> '))
+        except:
+            answer = 0
+
+        buffer = self.balance - answer
+        if (buffer) < 0:
+            print('Недостаточно средств!')
+
+        elif buffer >= 0:
+            self.balance = buffer
+            print('Операция успешно завершена!')
+
+        return self.return_main_menu()
+
+    # Настройки и графика
+    def setting(self, num_option):
+
+        # разделитель
+        if num_option == 1:
+            return f'{"-" * 35}\n'
+
+    # возврат в главное меню
+    def return_main_menu(self):
+        print(self.setting(1))
+
+        sleep(2)
+        return self.main_menu()
+
+# Черепашка
+class question_2_class():
+
+    def __init__(self, quest_str, num_quest, name_quest):
+        self.quest_str = quest_str
+        self.num_quest = num_quest
+        self.name_quest = name_quest
+
+        self.action = 0
+        self.step = 1
+        self.x = 2
+        self.y = 2
+
+        self.x_turtle = 0
+        self.y_turtle = 0
+
+        '''Описание:
+            Создайте класс Черепашка, который хранит позиции:
+             - x и y черепашки, а также 
+             - s - количество клеточек, на которое она перемещается за ход. 
+             
+             У этого класс есть методы:
+             ● go_up() - увеличивает y на s 
+             ● go_down() - уменьшает y на s 
+             ● go_left() - уменьшает x на s 
+             ● go_right() - увеличивает y на s 
+             ● evolve() - увеличивает s на 1 
+             ● degrade() - уменьшает s на 1 или выкидывает ошибку,
+             когда s может стать ≤0 
+             ● count_moves(x2,y2) - возвращает минимальное количество действий, за которое черепашка 
+             сможет добраться до x2 y2 от текущей позиции
+        '''
+
+    # Последовательное исполнение
+    def enter(self):
+        print(self.quest_str.format(self.num_quest, self.name_quest))  # Номер задания
+
+        # Код
+        self.setting_game()
+
+        return
+
+
+
+    '''Основные функции'''
+    # Настройки игры + запуск
+    def setting_game(self):
+        print('Настройки\n'
+              '1. Координаты черепашки\n'
+              '2. Шаг черепашки')
+        print('0. Запуск игры')
+
+        try:
+            answer = int(input('Введите номер комманды:\n>>> '))
+        except:
+            answer = None
+
+        # Текущие координаты черепашки
+        if answer == 1:
+            self.setting_coordinates()
+
+        # Шаг черепашки
+        elif answer == 2:
+            self.setting_step()
+
+        # Запуск игры
+        elif answer == 0:
+            self.play()
+
+
+        # Комманда не распознанна!
+        else:
+            print('Комманда не распознанна!')
+            return self.setting_game()
+
+    # Запуск
+    def play(self):
+        switch = True
+        while switch:
+            if self.x != self.x_turtle:
+                self.x_turtle = self.coordinate_x(self.x_turtle)
+                # print(f'Координаты x: {x_turtle}')
+
+            else:
+                if self.y != self.y_turtle:
+                    self.y_turtle = self.coordinate_y(self.y_turtle)
+                    # print(f'Координаты y: {y_turtle}')
+
+
+                else:
+                    switch = False
+
+        print(f'Колличество действий для достижения цели: {self.action}')
+
+
+
+    '''Дополнительные функции'''
+    # Расчет координат (x)
+    def coordinate_x(self, x_turtle):
+        if x_turtle < self.x:
+            x_turtle += self.step
+            self.action += 1
+
+        elif x_turtle > self.x:
+            x_turtle -= self.step
+            self.action += 1
+
+        return x_turtle
+
+    # Расчет координат (y)
+    def coordinate_y(self, y_turtle):
+        if y_turtle < self.y:
+            y_turtle += self.step
+            self.action += 1
+
+        if y_turtle > self.y:
+            y_turtle -= self.step
+            self.action += 1
+
+        elif y_turtle == self.y:
+            pass
+
+        return y_turtle
+
+    # Настройка шага
+    def setting_step(self):
+        min_step = 1
+        max_step = 2
+
+        print(f'Настройка шага(Мин.: {min_step}, Макс.: {max_step}, Текущ.: {self.step})\n'
+              f'1. Увеличить длинну шага на +1\n'
+              f'2. Уменьшить длинну шага на -1')
+        print('0. Закончить настройку')
+
+        try:
+            answer = int(input('Введите номер комманды\n>>> '))
+        except:
+            answer = -1
+
+        # Увеличить длинну шага на +1
+        if answer == 1:
+
+            new_step = self.step + 1
+            if new_step <= max_step:
+                self.step = new_step
+
+            else:
+                print(f'Внимание!\n'
+                      f'Максимальное значение шага: {max_step}')
+                sleep(2)
+
+            return self.setting_step()
+
+        # Уменьшить длинну шага на -1
+        elif answer == 2:
+
+            new_step = self.step - 1
+            if min_step <= new_step:
+                self.step = new_step
+
+            else:
+                print(f'Внимание!\n'
+                      f'Минимальное значение шага: {min_step}')
+                sleep(2)
+
+            return self.setting_step()
+
+        # Закончить настройку
+        elif answer == 0:
+            return self.setting_game()
+
+        # Комманда не распознанна!
+        else:
+            print('Комманда не распознанна!')
+            self.setting_step()
+
+    # Настройка координат
+    def setting_coordinates(self):
+        min = 0
+        max = 16
+
+        print(f'Координаты x (мин.: {min}, макс.: {max}, текущ.: {self.x_turtle}):\n'
+              '1. Увеличить на +2\n'
+              '2. Уменьшить на -2\n')
+
+        print(f'Координаты y (мин.: {min}, макс.: {max}, текущ.: {self.y_turtle}):\n'
+              '3. Увеличить на +2\n'
+              '4. Уменьшить на -2\n')
+
+        print('0. Закончить настройку')
+
+        try:
+            answer = int(input('Введите номер комманды:\n>>> '))
+        except:
+            answer = None
+
+        # Увеличить на +2
+        if answer == 1:
+            if self.x_turtle == max:
+                print('Достигнут максимум')
+                sleep(2)
+                return self.setting_coordinates()
+
+            else:
+                self.x_turtle += 2
+                return self.setting_coordinates()
+
+        # Уменьшить на -2
+        elif answer == 2:
+            if self.x_turtle == min:
+                print('Достигнут минимум!')
+                sleep(2)
+                return self.setting_coordinates()
+
+            else:
+                self.x_turtle -= 2
+                return self.setting_coordinates()
+
+        # Увеличить на +2
+        elif answer == 3:
+            if self.y_turtle == max:
+                print('Достигнут максимум')
+                sleep(2)
+                return self.setting_coordinates()
+
+            else:
+                self.y_turtle += 2
+                return self.setting_coordinates()
+
+        # Уменьшить на -2
+        elif answer == 4:
+            if self.y_turtle == min:
+                print('Достигнут минимум!')
+                sleep(2)
+                return self.setting_coordinates()
+
+            else:
+                self.y_turtle -= 2
+                return self.setting_coordinates()
+
+
+        # Выход в меню
+        elif answer == 0:
+            self.setting_game()
+
+        else:
+            print('Комманда не распознанна!')
+            self.setting_game()
+
+quest_str, name_quest = ['Задание №{} "{}"', ['Касса', '', '']]
+
+data_quest_1 = question_1_class(quest_str, 1, name_quest[0])
+# data_quest_1.enter()
+
+data_quest_2 = question_2_class(quest_str, 2, name_quest[1])
+data_quest_2.enter()
